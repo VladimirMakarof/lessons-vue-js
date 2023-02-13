@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://unpkg.com/vue@next"></script>
+
+  <title>vue 1</title>
+</head>
+
+<body>
+  <!-- vue не работает со всем body мы выбираем с какой частью html мы будем работать, только в
+  определенном div к примеру -->
+  <div id="app">
+    <!-- связываем пользовательский ввод или выбор вся введенная информация будет сохраняться в userInput: "" -->
+    <input type="text" v-model="userInput">
+    <!-- интерполяция текста, передаём текста из js в html -->
+    <p>1. {{userInput}}</p>
+    <!-- шаблонизатор помогает данные в значение выводить в html -->
+    <!-- валидные js выражения -->
+    <p>2. {{userInput.length < 1 ? "Вы ничего не ввели" : userInput }} </p>
+        <p>3. {{userOutput }} </p>
+        <!-- интерполяция html -->
+        <p v-html="userHtmlOutput"> </p>
+  </div>
+  <script src="script.js"></script>
+</body>
+
+</html>

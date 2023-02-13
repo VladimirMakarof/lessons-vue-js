@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://unpkg.com/vue@next"></script>
+  <link rel="stylesheet" href="style.css">
+  <title>lesson 2</title>
+</head>
+
+<body>
+  <div id="app">
+    <div>
+      <!-- v-bind:class="color" color это имя свойства из объекта data и будет значение active -->
+      <!-- v-bind:class="{{active: currentTab === tab }}" active - имя класса который должен быть в css, currentTab === tab условие прои котором этот класс будет добавляться -->
+      <span class="tab-menu" v-bind:class="{active: currentTab === tab }" v-for="tab in tabs"
+        v-on:click="currentTab = tab">
+        {{tab.toUpperCase()}}
+      </span>
+      <!-- отрисовка элемента в зависимости от условия, если условие выполняется то элемент отображается -->
+      <!-- v-show  в случае выполнения условия элемент будет отображен, display block, но элемент остаётся в html-->
+      <div v-show="currentTab === tabs[0] ">
+        <h2>Все книги</h2>
+        <div v-for="book in allBooks" :key="book.title">
+          <h2>{{ book.title.toUpperCase() }}</h2>
+          <p>{{ book.description }}</p>
+          <img :src="book.img" />
+          <!-- <p>{{ book.inList }}</p> -->
+          <div>
+            <!-- Если значение true то появляется сообщение о том что книга уже  списке, если нет в списке то добавить -->
+            <!-- В случае если при нажатие на кнопку будет всего инструкция то можно прописать в html в случае, если инструкций больше 1 то нужно создавать новый методы и его уже вызывать -->
+            <!-- Если метод не принимает аргументов то можно написать только название метода, если принимает то ставим круглые скобки и передаём любые аргументы, в данном случае передаём объект book-->
+            <button v-bind:disabled="book.inList" @click="addToMyList(book)">
+              {{book.inList ? "Уже в списке" : "Добавить" }}
+            </button>
+          </div>
+        </div>
+      </div>
+      <!-- v-if в случае выполнения элемент отображается в случае не выполнения элемент удаляется из html -->
+      <!-- Данное витление будет работать только в том случае если между v-if и  v-else ничего не будет -->
+      <div v-if="currentTab === tabs[1]">
+        <h2 v-if="!myList.length">В списке нет книг</h2>
+        <div v-else>
+          <h2>Мой список</h2>
+          <!-- :key передаётся уникальное значение массива -->
+          <!--  v-for="(book, i) in myList" перебираем массив, в переменную book будет передаваться i индекс элемента массива, myList- массив, book - элемент массива, i - индекс элемента массива -->
+          <div v-for="(book, i) in sortedMyList" :key="book.title">
+            <h2>{{book.title.toUpperCase()}}</h2>
+            <div>
+              <button @click="deleteFromMyList(book, i)">Удалить из списка</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="script.js"></script>
+</body>
+
+</html>

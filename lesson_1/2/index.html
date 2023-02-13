@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://unpkg.com/vue@next"></script>
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">
+
+    <h3>{{title}}</h3>
+
+    <h2>Название: {{book.title.toUpperCase()}}</h2>
+
+    <p>Автор:{{$customFilters.firstToUpper(book.author)}}</p>
+
+    <p>Соавторы</p>
+    <ol>
+      <!-- <li>{{book.otherAuthors[0]}}</li>
+      <li>{{book.otherAuthors[1]}}</li> -->
+
+      <!-- перебор всех данных что пришли с сервера, и разместить их всех в списке из массива-->
+      <li v-for="otherAuthor in book.otherAuthors">
+        {{$customFilters.firstToUpper(otherAuthor)}}
+      </li>
+    </ol>
+    <!-- привязка атрибутов  -->
+    <img v-bind:src="book.img" height="500" alt="">
+
+    <!-- привязка атрибутов без bind -->
+    <img :src="book.img" height="500" alt="">
+
+  </div>
+
+  <script src="script.js"></script>
+
+</body>
+
+</html>
