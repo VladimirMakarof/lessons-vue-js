@@ -10,6 +10,88 @@
 </head>
 
 <body>
+  <div id="app">
+    <!-- у события бывают модификаторы prevent отменяет событие умолчанию, и будет вызван метод addRequest, когда вызывается метод в него передаётся объект которое описывает событие, обращаемся к этом объекту у него получаем элемент на котором произошло событие и если это форма то есть метод reset -->
+    <form @submit.prevent="addRequest">
+      <h2>Заявка на выбор яхты</h2>
+      <fieldset>
+        <legend>Контактная информация</legend>
+        <div>
+          <label for="name">Введите имя:</label>
+          <!-- v-model - это директива в Vue.js, которая позволяет связать элемент формы с переменной в приложении и автоматически обновлять значение переменной при изменении элемента формы. -->
+          <input type="text" id="name" name="user" v-model.trim="formData.user">
+        </div>
+
+        <div>
+          <label for="email">Введите email:</label>
+          <input type="email" id="email" name="email" v-model.trim="formData.email">
+        </div>
+
+        <div>
+          <label for="phone">Введите телефон:</label>
+          <input type="text" id="phone" name="phone" v-model.trim="formData.phone">
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Информация для подбора яхты</legend>
+        <div>
+          <label for="companies">Укажите производителя:</label>
+          <select id="companies" name="company" multiple v-model="formData.companies">
+            <!-- Атрибут :key="" определяет уникальный идентификатор каждого элемента списка. Это позволяет Vue лучше оптимизировать рендеринг списка, перерисовывая только те элементы, которые действительно изменились, вместо полной перерисовки всего списка. -->
+            <option v-for="company in companies" :key="company.id" :value="company.id">
+              {{company.name }}
+            </option>
+          </select>
+        </div>
+
+        <div>
+          <label>
+            <!-- v-model.number привести значение к числу -->
+            Максимальная цена (евро): <input type="number" name="price"
+              v-model.number="formData.price">
+          </label>
+        </div>
+        <div>
+          <label>
+            Максимальное количество палуб: <input type="number" name="count"
+              v-model.number="formData.count">
+          </label>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Дополнительная информация</legend>
+        <div>
+          <div><label for=" comment">Комментарий к заявке</label>
+          </div>
+          <textarea name="comment" id="comment" v-model.trim="formData.comment"></textarea>
+        </div>
+
+        <div>
+          <p>Как с Вами лучше связаться?</p>
+          <div><label><input value="call" type="checkbox" name="contacts[]"
+                v-model="formData.contacts"> Телефон
+              (звонок)</label></div>
+          <div><label><input value="sms" type="checkbox" name="contacts[]"
+                v-model="formData.contacts"> Телефон
+              (сообщение)</label></div>
+          <div><label><input value="email" type="checkbox" name="contacts[]"
+                v-model="formData.contacts"> E-mail</label>
+          </div>
+        </div>
+      </fieldset>
+
+      <div>
+        <label>
+          Согласие на обработку персональных данных:
+          <input type="checkbox" checked name="agree" v-model="formData.agree">
+        </label>
+      </div>
+
+      <input type="submit" value="Подобрать" :disabled="!formData.agree">
+    </form>
+  </div>
   <script src="script.js"></script>
 </body>
 
