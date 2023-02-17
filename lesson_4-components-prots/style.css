@@ -1,0 +1,7 @@
+.tab-menu {
+  padding: 10px;
+  cursor: pointer;
+}
+.tab-menu.active {
+  background: orangered;
+}
