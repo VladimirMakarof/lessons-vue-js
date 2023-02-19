@@ -13,7 +13,27 @@ const routes = [ // массив с маршрутами, каждый марш�
   },
   {
     path: '/lists',
-    component: () => import('../views/Lists.vue')
+    component: () => import('../views/Lists.vue'),
+    children: [
+      { // когда добавляем маршруты к дочерним компонентам, то пишем имя маршрута без / 
+        path: 'reading', // в router-link  /lists/reading
+        component: () => import('../views/lists/Reading.vue'),
+        children: [{
+          name: 'Book',
+          path: 'book/:id',
+          component: () => import('../views/lists/Book.vue')
+        }
+        ]
+      },
+      { // когда добавляем маршруты к дочерним компонентам, то пишем имя маршрута без / 
+        path: 'finished', // в router-link  /lists/reading
+        component: () => import('../views/lists/Finished.vue')
+      },
+      { // когда добавляем маршруты к дочерним компонентам, то пишем имя маршрута без / 
+        path: 'shared', // в router-link  /lists/reading
+        component: () => import('../views/lists/Shared.vue')
+      }
+    ],
   }
 ]
 
@@ -23,3 +43,4 @@ const router = createRouter({ // функция createRouter позволяет 
 })
 
 export default router
+// вложенный маршрут, внутри компонента есть ссылка на другой компонент 
