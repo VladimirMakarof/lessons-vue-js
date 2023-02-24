@@ -4,7 +4,8 @@
 
 <script>
 export default {
-  name: "FinishedList",
+  // eslint-disable-next-line
+  name: "Finished",
 }
 </script>
 

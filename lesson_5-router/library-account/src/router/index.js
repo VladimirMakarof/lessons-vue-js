@@ -34,6 +34,15 @@ const routes = [ // массив с маршрутами, каждый марш�
         component: () => import('../views/lists/Shared.vue')
       }
     ],
+  },
+  {
+    // если нужно прописать маршрут для обработки 404 страницы маршрут будет записываться в таком виде '/:patchMatch(.*)*'
+    path: '/:patchMatch(.*)*',
+    redirect: '/404'
+    // component: () => import('../views/NotFound.vue')
+  }, {
+    path: '/404',
+    component: () => import('../views/NotFound.vue')
   }
 ]
 

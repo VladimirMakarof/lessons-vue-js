@@ -7,7 +7,8 @@
 <script>
 import LibraryHeader from '@/components/LibraryHeader.vue';
 export default { // это объект компонента vue 
-  name: "BookList",  // имя компонента, обычно соответствует имени файла/ имя нужно для использования компонента в других компонентах 
+  // eslint-disable-next-line
+  name: "Lists",  // имя компонента, обычно соответствует имени файла/ имя нужно для использования компонента в других компонентах 
   // вложенное меню будет в списках
   components: { LibraryHeader },
   data() {

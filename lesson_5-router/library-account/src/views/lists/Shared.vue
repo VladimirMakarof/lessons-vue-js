@@ -1,7 +1,8 @@
 <template>
   <div>Форма добавления книги</div>
   <!-- vee-form> это границы формы -->
-  <vee-form :validation-schema="rules">
+  <!-- :validation-schema="rules" отменяет отправку данных по умолчанию на сервер, @submit="sendData" указываем имя метода который сработает по нажатию submit/ и в том случае если всё соответствует требованиям   -->
+  <vee-form :validation-schema="rules" @submit="sendData">
     <div>
       <label>Выбор жанра</label>
       <vee-field name="genre" as="select">
@@ -49,10 +50,17 @@
 </template>
 
 <script>
-import { Form, Field, ErrorMessage } from 'vee-validate';
+import { Form, Field, ErrorMessage, configure } from 'vee-validate';
 import * as yup from 'yup';
+import { mapMutations } from 'vuex';
+
+configure({
+  validateOnInput: true
+})
+
 export default { /* библиотека для валидации форм vee-validate, yup */
-  name: "SharedList",
+  // eslint-disable-next-line
+  name: "Shared",
   components: {
     // Form, Field, ErrorMessage
     VeeForm: Form, /* границы формы */
@@ -63,9 +71,26 @@ export default { /* библиотека для валидации форм vee-
     return {
       rules: yup.object({
         // значение атрибута name: правило
+        // title и другие это name input, после тип данных, необходимость к заполнению и сообщение 
+        // в случае если это множественный выбор то это массив данных если 1 то строка 
         title: yup.string().trim().required("Поле обязательно заполнить").max(20, "Максимум 20 символов"),
-        pageCount: yup.number().typeError("Введите число").required("Поле обязательно заполнить").positive("Введите целое число")
+        pageCount: yup.number().typeError("Введите число").required("Поле обязательно заполнить").positive("Введите целое число"),
+        description: yup.string().trim().required("Поле обязательно заполнить").min(10, "Минимум символов 10"),
+        genre: yup.string().trim().required("Необходимо выбрать жанр"),
+        age: yup.array().required("Необходимо выбрать хотя бы один пункт]"),
+        read: yup.string().required("Необходимо выбрать один пункт]"),
       })
+    }
+  },
+  methods: {
+    // добавление мутации в объект vue 
+    ...mapMutations(['shareBook']), // три точки разбивает коллекцию мутации на отдельные методы, и эти методы становятся элементами vue 
+    sendData(values) {
+      // values данные из формы
+      // будет выглядеть {значение атрибута name: значение атрибута value }
+      console.log(values);
+      // this.$store.commit('shareBook', { book: values }) // обращение к мутации 1 способ
+      this.shareBook(values) // обращение к мутации 2 способ через функцию mapMutation, для того что бы им воспользоваться нужно использовать импорт 
     }
   }
 }
