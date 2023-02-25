@@ -4,8 +4,8 @@
 
 <script>
 export default {
-  // eslint-disable-next-line
-  name: "Finished",
+
+  name: "FinishedBook",
 }
 </script>
 

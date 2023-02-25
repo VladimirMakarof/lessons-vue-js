@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- подключение стилей Vuetify 3 -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vuetify@3.1.6/dist/vuetify.min.css">
+  <!-- подключение Vue 3 -->
+  <script src="https://cdn.jsdelivr.net/npm/vue@next/dist/vue.global.prod.js"></script>
+  <!-- подключение Vuetify 3 -->
+  <script src="https://cdn.jsdelivr.net/npm/vuetify@3.1.6/dist/vuetify.min.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/@mdi/font@5.x/css/materialdesignicons.min.css"
+    rel="stylesheet">
+  <title>Lesson 7</title>
+</head>
+
+<body>
+  <div id="app">
+    <v-app>
+
+
+
+      <v-navigation-drawer class="bg-deep-purple" app v-model="open">
+        <v-list color="transparent">
+          <v-list-item prepend-icon="mdi-view-dashboard" title="Dashboard"></v-list-item>
+          <v-list-item prepend-icon="mdi-account-box" title="Account"></v-list-item>
+          <v-list-item prepend-icon="mdi-gavel" title="Admin"></v-list-item>
+        </v-list>
+
+        <template v-slot:append>
+          <div class="pa-2">
+            <v-btn block>
+              Logout
+            </v-btn>
+          </div>
+        </template>
+      </v-navigation-drawer>
+      <v-app-bar app>
+        <v-app-bar-nav-icon @click="open = !open"></v-app-bar-nav-icon>app-bar
+      </v-app-bar>
+
+
+
+      <v-main>
+
+        <v-heading level="1" class=" text-h5 text-md-h4 text-lg-h1">Мой
+          заголовок
+          h1
+          внутри карточки</v-heading>
+
+        <v-card-title class="text-center">Заголовок карточки</v-card-title>
+        <v-card-text class="text-center ">
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Distinctio exercitationem
+          voluptates placeat eius atque blanditiis sunt molestias nam ab. Consequatur.
+        </v-card-text>
+
+        <v-container>
+          <v-carousel class="rounded-pill">
+            <v-carousel-item src="https://cdn.vuetifyjs.com/images/cards/docks.jpg"
+              cover></v-carousel-item>
+
+            <v-carousel-item src="https://cdn.vuetifyjs.com/images/cards/hotel.jpg"
+              cover></v-carousel-item>
+
+            <v-carousel-item src="https://cdn.vuetifyjs.com/images/cards/sunshine.jpg"
+              cover></v-carousel-item>
+          </v-carousel>
+        </v-container>
+      </v-main>
+      <v-footer class="bg-grey-lighten-1">
+        <v-row justify="center" no-gutters>
+          <v-btn v-for="link in links" :key="link" color="white" variant="text" class="mx-2"
+            rounded="xl">
+            {{ link }}
+          </v-btn>
+          <v-col class="text-center mt-4" cols="12">
+            {{ new Date().getFullYear() }} — <strong>Vuetify</strong>
+          </v-col>
+        </v-row>
+      </v-footer>
+    </v-app>
+  </div>
+  <script>
+    const { createApp } = Vue
+    const { createVuetify } = Vuetify
+
+    const vuetify = createVuetify()
+
+    const app = createApp({
+      data() {
+        return {
+          open: false,
+          links: [
+            'Home',
+            'About Us',
+            'Team',
+            'Services',
+            'Blog',
+            'Contact Us',
+          ],
+        }
+      }
+    })
+
+    app.use(vuetify).mount('#app')
+  </script>
+</body>
+
+</html>

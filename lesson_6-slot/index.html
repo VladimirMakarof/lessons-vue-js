@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/main.css">
+  <script src="https://unpkg.com/vue@next"></script>
+  <title>Lesson 6</title>
+</head>
+
+<body>
+  <div id="app">
+    <card>
+      <template v-slot:title>
+        <h3>Заголовок статьи</h3>
+      </template>
+      <template v-slot:subtitle>
+        <p>Дата: 13-07-20</p>
+      </template>
+      <template v-slot:content>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Laudantium
+        quae,
+        id error nam consequatur obcaecati! Voluptates placeat similique mollitia quae!</template>
+    </card>
+    <ads>
+      <p>Реклама</p>
+      <p>Приглашаем на работу</p>
+    </ads>
+    <ads>
+      <p>Ещё реклама</p>
+    </ads>
+    <ads></ads>
+    <ads></ads>
+    <ads></ads>
+  </div>
+  <script src="js/script.js"></script>
+</body>
+
+</html>

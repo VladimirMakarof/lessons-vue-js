@@ -10,8 +10,8 @@
 <script>
 
 export default {
-  // eslint-disable-next-line
-  name: "Book",
+
+  name: "BookList",
   computed: {
     book() {
       return this.$store.getters.bookById(parseInt(this.$route.params.id))

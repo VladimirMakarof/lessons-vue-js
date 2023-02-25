@@ -1,8 +1,10 @@
+// import { json } from 'express';
 import { createStore } from 'vuex'
 
 export default createStore({
   state: { // хранятся данные к которые будут обращаться разные компоненты
     shared: [], // книги которыми поделился пользователь 
+    usersBook: [],
     userBook: [
       {
         id: 1,
@@ -68,15 +70,27 @@ export default createStore({
     }
   },
   mutations: { // содержать методы позволяющие изменять состояния хранилища, данные которые меняют состояние внутри state
+    // в мутации не должно быть асинхронных методов 
+    // получение данных с сервера в мутации писать не нужно 
     shareBook(state, book) { // при вызове любого метода из мутации, первым аргументом будет передаваться объект state
       state.shared.push(book)
     },
     markRead(state, index) {
       state.userBook[index].finished = true
+    },
+    addToUserBook(state, books) {
+      for (let i = 0; i < books.length; i++) {
+        state.userBook.push(books[i])
+      }
     }
   },
-  // actions: {
-  // },
+  actions: { // любые асинхронные события что связаны с сервером прописываются в action 
+    loadData(context) { // первым аргументом принимает объект контекста, через объект контексты мы получаем доступ к мутациям и геттерам и самому state
+      fetch('http://localhost:8080/userbooks') // для отправки запросов на сервер, первым аргументом куда отправляем запрос 
+        .then(response => response.json()) // сервер вернёт ответ мы сможем получить в объекте - response 2 метода text() для текста либо block() для картинок
+        .then(jsonData => context.commit('addTpUserBook', jsonData))
+    }
+  },
   // modules: {
   // }
 })
