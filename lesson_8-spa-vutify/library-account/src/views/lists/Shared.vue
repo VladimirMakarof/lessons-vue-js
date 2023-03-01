@@ -45,7 +45,7 @@
         <label> <vee-field type="radio" value="no" name="read" />Нет</label>
       </div>
     </div>
-    <input type="submit" value="Добавить">
+    <input v-btn type="submit" value="Добавить">
   </vee-form>
 </template>
 
