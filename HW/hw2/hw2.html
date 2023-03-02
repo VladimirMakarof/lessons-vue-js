@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/hw2.css">
+    <title>HW2</title>
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+<body>
+    <div id="app">
+        <div v-for="(good, i) in sortedAllGoods">
+            <h3><b>Название:</b> {{good.title.toUpperCase()}}</h3>
+            <p><b>Цена:</b> {{good.price}} ₽</p>
+            <p :class="[{zero: good.count == 0}, {'not-many': good.count > 0 && good.count < 20}, {many: good.count >= 20}]"><b>Количество:</b> {{good.count}} шт</p>
+            <button @click="addToList(good)">Добавить в корзину</button>
+        </div>
+    </div>
+    <script src="JS/hw2.js"></script>
+</body>
+</html>
